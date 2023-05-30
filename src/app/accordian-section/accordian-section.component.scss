@@ -17,15 +17,20 @@ section {
   align-items: center;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-}
-
-.collapsed .content {
-  display: none;
+// animcations for the arrow
+img {
+  transition: transform 0.3s ease-in-out;
 }
 
 .collapsed img {
   transform: rotate(180deg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  &.collapsed {
+    display: none;
+  }
 }

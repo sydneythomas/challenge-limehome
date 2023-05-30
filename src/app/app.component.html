@@ -1,152 +1,185 @@
 <div class="wrapper">
   <h1>Your check-in details</h1>
-  <form class="form" #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
+  <form class="form" [formGroup]="form" (ngSubmit)="submitForm()">
     <app-accordian-section
       [title]="'Personal information'"
-      [filled]="detailsSectionFilled"
+      [filled]="accordianSections['detailsSectionFilled']"
+      formGroupName="detailsSectionFields"
     >
+      <div
+        class="inlineError"
+        *ngIf="formSubmitted && isFormGroupInvalid('detailsSectionFields')"
+      >
+        All details fields are required.
+      </div>
+
+      <label for="firstName">First name</label>
       <input
         type="text"
-        name="detailsSectionFields.firstName"
-        [(ngModel)]="detailsSectionFields['firstName']"
+        id="firstName"
+        formControlName="firstName"
         placeholder="First name"
-        required
       />
+
+      <label for="lastName">Last name</label>
       <input
         type="text"
-        name="detailsSectionFields.lastName"
-        [(ngModel)]="detailsSectionFields['lastName']"
+        id="lastName"
+        formControlName="lastName"
         placeholder="Last name"
-        required
       />
+
+      <label for="email">Email</label>
       <input
         type="email"
-        name="detailsSectionFields.email"
-        [(ngModel)]="detailsSectionFields['email']"
+        id="email"
+        formControlName="email"
         placeholder="Email"
-        #emailInput="ngModel"
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-        required
-        [ngClass]="{
-          inputError:
-            emailInput.invalid && (emailInput.dirty || emailInput.touched)
-        }"
       />
       <div
         class="inlineError"
         *ngIf="
-          emailInput.invalid &&
-          (emailInput.dirty || emailInput.touched) &&
-          formSubmitted
+          formSubmitted && isInvalid('detailsSectionFields.email', ['email'])
         "
       >
-        <span *ngIf="emailInput.errors?.['required']">Email is required.</span>
-        <span *ngIf="emailInput.errors?.['pattern']"
-          >Invalid email format.</span
-        >
+        Invalid email format.
       </div>
 
-      <!-- add phone validation -->
+      <!-- would add country drop down + phone number validation -->
+      <label for="phoneNumber">Phone number</label>
       <input
         type="text"
-        name="detailsSectionFields.phoneNumber"
-        [(ngModel)]="detailsSectionFields['phoneNumber']"
+        id="phoneNumber"
+        formControlName="phoneNumber"
         placeholder="Phone number"
       />
     </app-accordian-section>
 
-    <app-accordian-section [title]="'Address'" [filled]="adressSectionFilled">
+    <app-accordian-section
+      [title]="'Address'"
+      [filled]="accordianSections['addressSectionFilled']"
+      formGroupName="addressSectionFields"
+    >
+      <div
+        class="inlineError"
+        *ngIf="formSubmitted && isFormGroupInvalid('addressSectionFields')"
+      >
+        All address fields are required.
+      </div>
+
+      <label for="street">Street</label>
       <input
         type="text"
-        name="addressSectionFields.street"
-        [(ngModel)]="addressSectionFields['street']"
+        formControlName="street"
+        id="street"
         placeholder="Street"
-        required
       />
 
       <div class="form-container">
         <div class="form-input">
+          <label for="houseNumber">House number</label>
           <input
             type="text"
-            name="addressSectionFields.houseNumber"
-            [(ngModel)]="addressSectionFields['houseNumber']"
+            formControlName="houseNumber"
+            id="houseNumber"
             placeholder="House Nr."
-            required
           />
         </div>
 
         <div class="form-input">
+          <label for="postCode">Zip code</label>
           <input
             type="text"
-            name="addressSectionFields.postCode"
-            [(ngModel)]="addressSectionFields['postCode']"
+            formControlName="postCode"
+            id="postCode"
             placeholder="Zip code"
-            required
           />
         </div>
       </div>
 
+      <label for="city">City</label>
       <input
         type="text"
-        name="addressSectionFields.city"
-        [(ngModel)]="addressSectionFields['city']"
+        formControlName="city"
+        id="city"
         placeholder="City Name"
-        required
       />
+
+      <label for="country">Country</label>
       <input
         type="text"
-        name="addressSectionFields.country"
-        [(ngModel)]="addressSectionFields['country']"
+        formControlName="country"
+        id="country"
         placeholder="Country"
       />
     </app-accordian-section>
 
     <app-accordian-section
       [title]="'Payment details'"
-      [filled]="paymentSectionFilled"
+      [filled]="accordianSections['paymentSectionFilled']"
+      formGroupName="paymentSectionFields"
     >
+      <div
+        class="inlineError"
+        *ngIf="formSubmitted && isFormGroupInvalid('paymentSectionFields')"
+      >
+        All payment fields are required.
+      </div>
+      <div
+        class="inlineError"
+        *ngIf="
+          formSubmitted && isInvalid('paymentSectionFields.cvv', ['pattern'])
+        "
+      >
+        CVV must be 3 or 4 digits.
+      </div>
+
+      <label for="creditCardNumber">Credit card number</label>
       <input
-        type="text"
-        name="paymentSectionFields.creditCardNumber"
-        [(ngModel)]="paymentSectionFields['creditCardNumber']"
+        type="number"
+        formControlName="creditCardNumber"
+        id="creditCardNumber"
         placeholder="Credit card number"
       />
 
       <div class="form-container">
         <div class="form-input">
+          <label for="expiryDate">Expiration date</label>
           <input
             type="text"
-            name="paymentSectionFields.expiryDate"
-            [(ngModel)]="paymentSectionFields['expiryDate']"
-            placeholder="expiry date"
+            formControlName="expiryDate"
+            id="expiryDate"
+            placeholder="Expiration date"
           />
         </div>
 
         <div class="form-input">
+          <label for="cvv">cvv</label>
           <input
-            type="text"
-            name="paymentSectionFields.CVV"
-            [(ngModel)]="paymentSectionFields['CVV']"
+            type="number"
+            formControlName="cvv"
+            id="cvv"
             placeholder="CVV"
           />
         </div>
       </div>
 
+      <label for="cardholderName">Cardholder name</label>
       <input
         type="text"
-        name="paymentSectionFields.cardholderName"
-        [(ngModel)]="paymentSectionFields['cardholderName']"
+        formControlName="cardholderName"
+        id="cardholderName"
         placeholder="Cardholder Name"
       />
       <span class="footer">
-        Enter your card details: its number, expiration date and, 3-digit number
-        on the back of the card and the holder name.
+        Enter your card details: its number, expiration date and 3-to-4 digit
+        number on the back of the card and the holder name.
       </span>
     </app-accordian-section>
 
-    <!-- moved outside of the accordion section to that it is always visible -->
+    <!-- update: moved outside of the accordion section to that it is always visible -->
     <div>
-      <button>Save</button>
+      <button type="submit">Save</button>
     </div>
   </form>
 </div>

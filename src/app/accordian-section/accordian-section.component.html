@@ -1,15 +1,15 @@
-<section [ngClass]="{ collapsed: filled }">
+<section [@sectionAnimation]="filled ? 'collapsed' : 'expanded'">
   <div class="header" (click)="toggle()">
     <h2>{{ title }}</h2>
     <img
-      [ngClass]="{ collapsed: filled }"
+      [ngClass]="{ collapsed: filled, expanded: !filled }"
       src="assets/arrow-down.svg"
       alt="accordian arrow"
       width="20"
       height="20"
     />
   </div>
-  <div class="content">
+  <div class="content" [ngClass]="{ collapsed: filled, expanded: !filled }">
     <ng-content></ng-content>
   </div>
 </section>
