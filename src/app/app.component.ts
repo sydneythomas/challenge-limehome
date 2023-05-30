@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { expirationDateValidator } from './utils/validators';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit {
       }),
       paymentSectionFields: this.formBuilder.group({
         creditCardNumber: ['', Validators.required],
-        expiryDate: ['', Validators.required],
+        expiryDate: ['', [Validators.required, expirationDateValidator]],
         cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
         cardholderName: ['', Validators.required],
       }),

@@ -12,11 +12,16 @@
 
 ### What else I'd do
 
+- In general I wasn't sure if we were allowed to use component libraries or not; if so, I've have maybe opt-ed for bootrap since we get a lot of elements i need out of the box
 - I'm not crazy about the UX of the form, I'd probably not have 2 columns on mobile
 - On error, scroll the first form error into view
 - I'd have added a country code drowndown and validatted the phone numbers, as well as the credit card
 - Unit tests
 - If the form were actually being saved somewhere, a loading state on the button
+- implement a date picker for the expiryDate field
+- add a tooltip to explain what CVV is
+- add a progress bar
+- since there is only one submit button, i'm not sure what the point of the collapsible sections is. they'd only ever automatically be closed if the user already has a section filled, but there isn't a nice way to close the sections as we go along. If this was desired, I'd add a submit button to each section, make subsequent sections un-editable/collapsed unil the section before was filled, and then automatically open the next section... but i was very unsure about the behavior you wanted, since there was only one submit button.
 
 ## Limehome Notes
 

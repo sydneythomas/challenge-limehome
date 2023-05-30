@@ -133,6 +133,24 @@
       >
         CVV must be 3 or 4 digits.
       </div>
+      <div
+        class="inlineError"
+        *ngIf="
+          formSubmitted &&
+          isInvalid('paymentSectionFields.expiryDate', ['invalidFormat'])
+        "
+      >
+        Invalid date format.
+      </div>
+      <div
+        class="inlineError"
+        *ngIf="
+          formSubmitted &&
+          isInvalid('paymentSectionFields.expiryDate', ['dateExpired'])
+        "
+      >
+        Date has expired.
+      </div>
 
       <label for="creditCardNumber">Credit card number</label>
       <input
@@ -149,7 +167,7 @@
             type="text"
             formControlName="expiryDate"
             id="expiryDate"
-            placeholder="Expiration date"
+            placeholder="Expiration date (MM/YYYY)"
           />
         </div>
 
