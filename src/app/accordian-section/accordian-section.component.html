@@ -1,0 +1,15 @@
+<section [ngClass]="{ collapsed: filled }">
+  <div class="header" (click)="toggle()">
+    <h2>{{ title }}</h2>
+    <img
+      [ngClass]="{ collapsed: filled }"
+      src="assets/arrow-down.svg"
+      alt="accordian arrow"
+      width="20"
+      height="20"
+    />
+  </div>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</section>

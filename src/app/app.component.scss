@@ -28,3 +28,45 @@
   line-height: 16px;
   margin: 10px;
 }
+
+/* styles.css */
+.section {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.content {
+  padding: 10px;
+}
+
+.collapsed .content {
+  display: none;
+}
+
+.inlineError {
+  color: red;
+  font-size: 0.8em;
+  padding: 1em 0;
+}
+
+.footer {
+  margin-top: 10px;
+  font-size: 0.75em;
+}
+
+button {
+  background: #0172e0;
+  color: white;
+  width: 100%;
+  border: unset;
+  border-radius: 3px;
+  padding: 1rem;
+  margin: 1rem 0;
+}

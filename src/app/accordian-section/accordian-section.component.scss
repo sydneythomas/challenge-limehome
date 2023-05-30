@@ -1,0 +1,31 @@
+section {
+  //  original color was #f6f7fa, replacing with a border to provide contrast guidelines;
+  border-top: solid 1px black;
+  padding: 1rem;
+  margin: 0 calc(1rem * -1);
+
+  @media (min-width: 768px) {
+    border-radius: 3px;
+    margin: 0.5rem 0;
+    border: solid 1px black;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.collapsed .content {
+  display: none;
+}
+
+.collapsed img {
+  transform: rotate(180deg);
+}
