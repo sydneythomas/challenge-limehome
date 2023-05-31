@@ -21,26 +21,32 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit() {
+    const detailsFields = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', Validators.required],
+    });
+
+    const addressFields = this.formBuilder.group({
+      street: ['', Validators.required],
+      houseNumber: ['', Validators.required],
+      postCode: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+    });
+
+    const paymentFields = this.formBuilder.group({
+      creditCardNumber: ['', Validators.required],
+      expiryDate: ['', [Validators.required, expirationDateValidator]],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
+      cardholderName: ['', Validators.required],
+    });
+
     this.form = this.formBuilder.group({
-      detailsSectionFields: this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        phoneNumber: ['', Validators.required],
-      }),
-      addressSectionFields: this.formBuilder.group({
-        street: ['', Validators.required],
-        houseNumber: ['', Validators.required],
-        postCode: ['', Validators.required],
-        city: ['', Validators.required],
-        country: ['', Validators.required],
-      }),
-      paymentSectionFields: this.formBuilder.group({
-        creditCardNumber: ['', Validators.required],
-        expiryDate: ['', [Validators.required, expirationDateValidator]],
-        cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
-        cardholderName: ['', Validators.required],
-      }),
+      detailsSectionFields: detailsFields,
+      addressSectionFields: addressFields,
+      paymentSectionFields: paymentFields,
     });
   }
 
@@ -59,32 +65,16 @@ export class AppComponent implements OnInit {
           this.form.get('detailsSectionFields.firstName')!.value
         } submitted!`
       );
-      this.accordianSections['detailsSectionFilled'] = true;
-      this.accordianSections['addressSectionFilled'] = true;
-      this.accordianSections['paymentSectionFilled'] = true;
+      this.accordianSections['detailsSection'] = true;
+      this.accordianSections['addressSection'] = true;
+      this.accordianSections['paymentSection'] = true;
     } else {
       // all the field have to marked as touched in order to display validation errors
       this.markFormGroupAsTouched(this.form);
 
-      // TODO redundant, could use a refactor
-      if (
-        !this.accordianSections['detailsSectionFilled'] &&
-        this.isFormGroupInvalid('detailsSectionFields')
-      ) {
-        this.accordianSections['detailsSectionFilled'] = false;
-      }
-      if (
-        !this.accordianSections['addressSectionFilled'] &&
-        this.isFormGroupInvalid('addressSectionFields')
-      ) {
-        this.accordianSections['addressSectionFilled'] = false;
-      }
-      if (
-        !this.accordianSections['paymentSectionFilled'] &&
-        this.isFormGroupInvalid('paymentSectionFields')
-      ) {
-        this.accordianSections['paymentSectionFilled'] = false;
-      }
+      this.updateSectionValidity('detailsSection', 'detailsSectionFields');
+      this.updateSectionValidity('addressSection', 'addressSectionFields');
+      this.updateSectionValidity('paymentSection', 'paymentSectionFields');
     }
   }
 
@@ -111,5 +101,17 @@ export class AppComponent implements OnInit {
   isFormGroupInvalid(groupName: string): boolean {
     const group = this.form.get(groupName) as FormGroup;
     return group.invalid && group.touched;
+  }
+
+  private updateSectionValidity(
+    sectionName: string,
+    formGroupName: string
+  ): void {
+    if (
+      this.accordianSections[sectionName] &&
+      this.isFormGroupInvalid(formGroupName)
+    ) {
+      this.accordianSections[sectionName] = false;
+    }
   }
 }

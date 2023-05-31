@@ -3,7 +3,7 @@
   <form class="form" [formGroup]="form" (ngSubmit)="submitForm()">
     <app-accordian-section
       [title]="'Personal information'"
-      [filled]="accordianSections['detailsSectionFilled']"
+      [filled]="accordianSections['detailsSection']"
       formGroupName="detailsSectionFields"
     >
       <div
@@ -57,7 +57,7 @@
 
     <app-accordian-section
       [title]="'Address'"
-      [filled]="accordianSections['addressSectionFilled']"
+      [filled]="accordianSections['addressSection']"
       formGroupName="addressSectionFields"
     >
       <div
@@ -111,7 +111,7 @@
 
     <app-accordian-section
       [title]="'Payment details'"
-      [filled]="accordianSections['paymentSectionFilled']"
+      [filled]="accordianSections['paymentSection']"
       formGroupName="paymentSectionFields"
     >
       <div
