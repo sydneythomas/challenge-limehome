@@ -6,6 +6,7 @@
       [filled]="accordianSections['detailsSection']"
       formGroupName="detailsSectionFields"
     >
+      <!-- TODO refactor, currently this is shown if email has a different error, but there are values for everything -->
       <div
         class="inlineError"
         *ngIf="formSubmitted && isFormGroupInvalid('detailsSectionFields')"

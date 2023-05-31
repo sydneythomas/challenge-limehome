@@ -15,9 +15,9 @@ export class AppComponent implements OnInit {
   formSubmitted: boolean = false;
 
   accordianSections: { [key: string]: boolean } = {
-    detailsSection: true,
-    addressSection: true,
-    paymentSection: true,
+    detailsSection: false,
+    addressSection: false,
+    paymentSection: false,
   };
 
   ngOnInit() {
@@ -75,6 +75,11 @@ export class AppComponent implements OnInit {
       this.updateSectionValidity('detailsSection', 'detailsSectionFields');
       this.updateSectionValidity('addressSection', 'addressSectionFields');
       this.updateSectionValidity('paymentSection', 'paymentSectionFields');
+
+      const errorElement = document.querySelector('.inlineError');
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
 
