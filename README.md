@@ -4,18 +4,20 @@
 
 ### UX/UI Changes / Enhancements
 
-- The text/copy was quite confusing so I just made the best of it that I could.
+- The text/copy was quite confusin between what was already in the code and what the design showed so I just made the best of it that I could.
 - There's nowhere to submit to, so I simply give an alert and collapse all of the sections on save
 - Responsive design
+- I added "hidden" labels for acessibility & to match the design however I'd have opt-ed to show the labels for a number of reasons, including being able to add more details to the expiration date field (e.g. Label: Expiry date, placeholder: MM/YYY) or a tooltip to the CVV field
+- I didn't use aria-labels on the inputs instead because sources say the label element is still better
 - The design uses a super low contrast blue/gray for each section, which i replaced with a border because it didn't pass contract guidelines for accessibility
-- I added validation to the form, though since the design called for side-by-side fields on mobile, I opted not to go include inline errors for most fields. UX-wise I'm not sure how I feel about it
+- I added validation to the form, though since the design called for side-by-side fields on mobile, I opted not to go include inline errors for most fields. UX-wise I'm not sure how I feel about it - in fact, I am sure I don't like it, but to improve this would have required a much larger redesign and I'm not sure about the scope of changes I am supposed to be making.
 
 ### What else I'd do
 
 - In general I wasn't sure if we were allowed to use component libraries or not; if so, I've have maybe opt-ed for bootrap since we get a lot of elements i need out of the box
 - I'm not crazy about the UX of the form, I'd probably not have 2 columns on mobile
 - On error, scroll the first form error into view
-- I'd have added a country code drowndown and validatted the phone numbers, as well as the credit card
+- I'd have added a country code dropdown and validatted the phone numbers, as well as the credit card
 - Unit tests
 - If the form were actually being saved somewhere, a loading state on the button
 - implement a date picker for the expiryDate field
